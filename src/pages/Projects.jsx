@@ -43,6 +43,15 @@ function Projects() {
             <p className="text-sm mb-4">Un site qui stylise les noms et des phrases en utilisant des animations CSS et JavaScript.</p>
             <a href="https://nicestylers.netlify.app/" target="_blank" className="text-[#00ddeb] hover:underline">Voir le projet</a>
           </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="card bg-[#0d1b2a]/50 p-6 rounded-lg"
+          >
+            <h3 className="text-xl font-semibold mb-2">NICE-OBFUSCATOR</h3>
+            <p className="text-sm mb-4">Un Outils qui permet d'obfusquer un code JS.</p>
+            <a href="https://nice-obf.netlify.app/" target="_blank" className="text-[#00ddeb] hover:underline">Voir le projet</a>
+          </motion.div>
           
         </div>
       </div>
