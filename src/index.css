@@ -2,34 +2,312 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
 body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
   color: #e0e1dd;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
+/* Optimisations pour les performances */
+* {
+  box-sizing: border-box;
+}
+
+/* Amélioration du rendu des animations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Scroll fluide personnalisé */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimisation des transitions */
+.transition-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Particules d'arrière-plan */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #00ddeb;
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* Effet de typing */
+.typing-effect {
+  font-family: 'Fira Code', monospace;
+  border-right: 2px solid #00ddeb;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { border-color: #00ddeb; }
+  51%, 100% { border-color: transparent; }
+}
+
+/* Effet de code matrix */
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.1;
+}
+
+.matrix-char {
+  position: absolute;
+  font-family: 'Fira Code', monospace;
+  color: #00ddeb;
+  font-size: 14px;
+  animation: matrix-fall linear infinite;
+}
+
+@keyframes matrix-fall {
+  0% { transform: translateY(-100vh); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Cards améliorées */
 .card {
   background: rgba(27, 38, 59, 0.8);
   backdrop-filter: blur(10px);
   border-radius: 15px;
   padding: 2rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(0, 221, 235, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 221, 235, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.card:hover::before {
+  left: 100%;
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 221, 235, 0.3);
+  border-color: rgba(0, 221, 235, 0.5);
 }
 
+/* Tech logos avec effets avancés */
 .tech-logo {
   width: 50px;
   height: 50px;
   margin: 0.5rem;
-  transition: transform 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 0 10px rgba(0, 221, 235, 0.3));
+  position: relative;
 }
 
 .tech-logo:hover {
-  transform: scale(1.2);
+  transform: scale(1.3) rotate(360deg);
+  filter: drop-shadow(0 0 20px rgba(0, 221, 235, 0.8));
+}
+
+/* Effet de glitch */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  animation: glitch-1 0.5s infinite;
+  color: #ff0040;
+  z-index: -1;
+}
+
+.glitch::after {
+  animation: glitch-2 0.5s infinite;
+  color: #00ffff;
+  z-index: -2;
+}
+
+@keyframes glitch-1 {
+  0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translate(0); }
+  15%, 49% { transform: translate(-2px, -1px); }
+}
+
+@keyframes glitch-2 {
+  0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translate(0); }
+  21%, 62% { transform: translate(2px, 1px); }
+}
+
+/* Boutons avec effets néon */
+.neon-button {
+  position: relative;
+  background: transparent;
+  border: 2px solid #00ddeb;
+  color: #00ddeb;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.neon-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 221, 235, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.neon-button:hover::before {
+  left: 100%;
+}
+
+.neon-button:hover {
+  background: #00ddeb;
+  color: #0d1b2a;
+  box-shadow: 0 0 30px #00ddeb, 0 0 60px #00ddeb, 0 0 90px #00ddeb;
+  text-shadow: 0 0 10px #0d1b2a;
+}
+
+/* Effet de scan line */
+.scan-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-line::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ddeb, transparent);
+  animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Effet de code défilant */
+.code-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.1;
+}
+
+.code-line {
+  position: absolute;
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  color: #00ddeb;
+  white-space: nowrap;
+  animation: code-scroll 10s linear infinite;
+}
+
+@keyframes code-scroll {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Effet de loading terminal */
+.terminal-loading {
+  font-family: 'Fira Code', monospace;
+  color: #00ddeb;
+}
+
+.terminal-loading::after {
+  content: '█';
+  animation: terminal-blink 1s infinite;
+}
+
+@keyframes terminal-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Effet holographique */
+.holographic {
+  background: linear-gradient(45deg, #00ddeb, #1b263b, #00ddeb);
+  background-size: 300% 300%;
+  animation: hologram 3s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes hologram {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Responsive amélioré */
+@media (max-width: 768px) {
+  .particle { display: none; }
+  .matrix-bg { display: none; }
+  .code-rain { display: none; }
 }
