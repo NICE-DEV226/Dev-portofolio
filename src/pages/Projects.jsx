@@ -77,6 +77,16 @@ function Projects() {
       icon: "📱",
       color: "#0088cc"
     }
+    {
+      id: 1,
+      title: "NICE-DOWNS",
+      description: "Téléchargez facilement vos vidéos et images depuis TikTok, Facebook, Twitter et Instagram etc...... Simple, rapide et gratuit.",
+      tech: ["React", "CSS3", "Framer Motion"],
+      link: "https://nice-downs.vercel.app/",
+      type: "live",
+      icon: "🎨",
+      color: "#ff6b6b"
+    },
   ];
 
   return (
